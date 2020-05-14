@@ -29,6 +29,7 @@ flutter:
 
   assets:
     - assets/png/bg.jpg
+    - assets/png/drawerhead.png
 
   fonts:
     - family: Pacifico
