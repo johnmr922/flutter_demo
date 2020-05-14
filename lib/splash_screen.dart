@@ -30,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void _navigateToHome()
   {
-    Navigator.of(context).pushReplacement(MaterialPageRoute(builder:(BuildContext context) => HomeScreen()
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder:(BuildContext context) => HomeScreen(title: 'Flutter Demo')
     ));
   }
 
