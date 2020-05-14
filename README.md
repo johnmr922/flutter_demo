@@ -1,10 +1,13 @@
 # flutterdemo
 
-A new Flutter application.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This project is a starting point for a Flutter language learning.
+
+# To Do List
+Day1  .. Custom Splash Screen and Navigation Drawer
+
 
 Screenshoot
 --------
