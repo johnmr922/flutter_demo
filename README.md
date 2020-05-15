@@ -1,4 +1,4 @@
-# flutterdemo (Basic Components)
+# flutter Demo (Basic Components)
 
 # To Do List
 - Day1  * Custom Splash Screen and Navigation Drawer
