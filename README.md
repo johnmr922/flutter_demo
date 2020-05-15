@@ -1,14 +1,12 @@
-# flutterdemo
-
-
-## Getting Started
-
-This project is a starting point for a Flutter language learning.
+# flutterdemo (Basic Components)
 
 # To Do List
 - Day1  * Custom Splash Screen and Navigation Drawer
 - Day2  * Tab Layout , BottonNaviagtion , Stepper ,ListView ,GridView, HTTPData
 
+
+## The MovieApi
+https://api.themoviedb.org/3/movie/popular?api_key={yourapi}&language=en-US&page=1
 
 Screenshoot
 --------
