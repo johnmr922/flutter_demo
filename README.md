@@ -2,7 +2,7 @@
 
 # To Do List
 - Day1  * Custom Splash Screen and Navigation Drawer
-- Day2  * Tab Layout , BottonNaviagtion , Stepper ,ListView ,GridView, HTTPData
+- Day2  * Tab Layout , BottonNaviagtion , Stepper ,ListView ,GridView, HTTPData ,BackDrop Screen
 
 
 ## The MovieApi
