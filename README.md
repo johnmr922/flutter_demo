@@ -7,7 +7,7 @@ This project is a starting point for a Flutter language learning.
 
 # To Do List
 - Day1  * Custom Splash Screen and Navigation Drawer
-- Day2  * Tab Layout and BottonNaviagtion
+- Day2  * Tab Layout , BottonNaviagtion , Stepper ,ListView ,GridView, HTTPData
 
 
 Screenshoot
