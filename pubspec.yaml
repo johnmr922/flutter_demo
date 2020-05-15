@@ -9,6 +9,7 @@ environment:
 
 dependencies:
   shimmer: ^1.1.1
+  http: ^0.12.0
 
   flutter:
     sdk: flutter
@@ -30,6 +31,12 @@ flutter:
   assets:
     - assets/png/bg.jpg
     - assets/png/drawerhead.png
+    - assets/png/bbb.png
+    - assets/png/ccc.png
+    - assets/png/ddd.png
+    - assets/png/eee.png
+    - assets/png/fff.jpg
+    - assets/png/ggg.png
 
   fonts:
     - family: Pacifico
