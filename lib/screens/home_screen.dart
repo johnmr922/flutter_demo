@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutterdemo/tabs/first_tab.dart';
+import 'package:flutterdemo/tabs/four_tab.dart';
+import 'package:flutterdemo/tabs/second_tab.dart';
+import 'package:flutterdemo/tabs/third_tab.dart';
+import 'package:flutterdemo/util/custom_snackbar.dart';
 
 class HomeScreen extends StatefulWidget {
 
@@ -9,8 +14,10 @@ class HomeScreen extends StatefulWidget {
   HomeScreenState createState() => HomeScreenState();
 }
 
-class HomeScreenState extends State<HomeScreen>
+class HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMixin
 {
+
+  //Create a Drawer Setup
   Drawer getNavDrawer(BuildContext context) {
     var headerChild = DrawerHeader(child: Stack(
         children: <Widget>[
@@ -73,18 +80,116 @@ class HomeScreenState extends State<HomeScreen>
     );
   }
 
+  // Create a tab controller
+  TabController controller;
+  @override
+  void initState() {
+    super.initState();
+    // Initialize the Tab Controller
+    controller = TabController(length: 4, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    // Dispose of the Tab Controller
+    controller.dispose();
+    super.dispose();
+  }
+
+  TabBar getTabBar() {
+    return TabBar(
+      tabs: <Tab>[
+        Tab(
+          // set icon to the tab
+          text: 'Tab 1',
+          icon: Icon(Icons.favorite),
+        ),
+        Tab(
+          text: 'Tab 2',
+          icon: Icon(Icons.adb),
+        ),
+        Tab(
+          text: 'Tab 3',
+          icon: Icon(Icons.airport_shuttle),
+        ),
+        Tab(
+          text: 'Tab 4',
+          icon: Icon(Icons.account_circle),
+        ),
+      ],
+      // setup the controller
+      controller: controller,
+    );
+  }
+
+  TabBarView getTabBarView(var tabs) {
+    return TabBarView(
+      // Add tabs as widgets
+      children: tabs,
+      // set the controller
+      controller: controller,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Container(
-          child: Center(
-            child: Text("Home Screen"),
-          )),
-      // Set the nav drawer
+          title: Text(widget.title),
+          actions: <Widget>[
+           IconButton(icon: Icon(Icons.camera_alt),
+           onPressed:() {
+             Scaffold.of(context).showSnackBar(mysnackBar('Camera'));
+           }),
+            IconButton(icon: Icon(Icons.save),
+                onPressed:() {
+                  Scaffold.of(context).showSnackBar(mysnackBar('Save'));
+                }),
+            IconButton(icon: Icon(Icons.access_alarms),
+                onPressed:() {
+                  Scaffold.of(context).showSnackBar(mysnackBar('Alarm'));
+                }),
+            IconButton(icon: Icon(Icons.language),
+                onPressed:() {
+                  Scaffold.of(context).showSnackBar(mysnackBar('Language'));
+                }),
+        ],
+          backgroundColor: Colors.blueAccent,
+          // Set the bottom property of the Appbar to include a Tab Bar
+          bottom: getTabBar(),
+
+        ),
+
+        // Set the TabBar view as the body of the Scaffold
+        body: getTabBarView(<Widget>[firstTab(), secondTab(), thirdTab(),fourTab()]),
+
       drawer: getNavDrawer(context),
+
+      // Set the bottom navigation bar
+      bottomNavigationBar: Material(
+        // set the color of the bottom navigation bar
+        color: Colors.deepPurple,
+        // set the tab bar as the child of bottom navigation bar
+        child: TabBar(
+          tabs: <Tab>[
+            Tab(
+              // set icon to the tab
+              icon: Icon(Icons.cake),
+            ),
+            Tab(
+              icon: Icon(Icons.insert_emoticon),
+            ),
+            Tab(
+              icon: Icon(Icons.bluetooth),
+            ),
+            Tab(
+              icon: Icon(Icons.wifi),
+            ),
+          ],
+          // setup the controller
+          controller: controller,
+        ),
+      ),
     );
   }
 }
