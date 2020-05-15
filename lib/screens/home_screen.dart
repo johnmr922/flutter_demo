@@ -3,8 +3,11 @@ import 'package:flutterdemo/tabs/first_tab.dart';
 import 'package:flutterdemo/tabs/four_tab.dart';
 import 'package:flutterdemo/tabs/second_tab.dart';
 import 'package:flutterdemo/tabs/third_tab.dart';
+import 'package:flutterdemo/util/constants.dart';
 import 'package:flutterdemo/util/custom_snackbar.dart';
 import 'package:flutterdemo/util/util_dark.dart';
+
+import 'back_drop.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -26,7 +29,6 @@ class HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMi
       Container(
         decoration: BoxDecoration(
             image: DecorationImage(
-              // image: NetworkImage('https://images.unsplash.com/photo-1547665979-bb809517610d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80'),
                 image: new AssetImage('assets/png/drawerhead.png'),
                 fit: BoxFit.cover
             ) )),
@@ -35,10 +37,12 @@ class HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMi
 
         ]
     ));
+
+
     var aboutChild = AboutListTile(
         child: Text("About"),
-        applicationName: "Flutter Learning",
-        applicationVersion: "v1.0.0",
+        applicationName:  'Flutter Demo',
+        applicationVersion:  'version 1.0',
         applicationIcon: Icon(Icons.adb),
         icon: Icon(Icons.info));
 
@@ -46,32 +50,40 @@ class HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMi
       return ListTile(
         leading: Icon(icon),
         title: Text(s),
+
         onTap: () {
-          setState(() {
-            // pop closes the drawer
-            Navigator.of(context).pop();
-            // navigate to the route
-            Navigator.of(context).pushNamed(routeName);
-          });
+          if(routeName==rn_backdrop) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => BackDropPage()),
+            );
+          }else{
+            setState(() {
+              // pop closes the drawer
+              Navigator.of(context).pop();
+              // navigate to the route
+              Navigator.of(context).pushNamed(routeName);
+            });
+          }
         },
       );
     }
 
     var myNavChildren = [
       headerChild,
-      getNavItem(Icons.account_balance, "Bussiness",MenuScreen.routeName),
-      getNavItem(Icons.account_balance_wallet, "Education", MenuScreen.routeName),
-      getNavItem(Icons.account_box, "Entertainment",MenuScreen.routeName),
-      getNavItem(Icons.account_circle, "Finance", MenuScreen.routeName),
-      getNavItem(Icons.access_alarm, "Health & fitness", MenuScreen.routeName),
-      getNavItem(Icons.account_balance_wallet, "Food & Drink", MenuScreen.routeName),
-      getNavItem(Icons.account_box, "Kids",MenuScreen.routeName),
-      getNavItem(Icons.account_circle, "LifeStyle", MenuScreen.routeName),
-      getNavItem(Icons.access_alarm, "News & Reading", MenuScreen.routeName),
-      getNavItem(Icons.account_balance_wallet, "Photo & Video", MenuScreen.routeName),
-      getNavItem(Icons.account_box, "Shopping",MenuScreen.routeName),
-      getNavItem(Icons.account_circle, "Social", MenuScreen.routeName),
-      getNavItem(Icons.access_alarm, "Tools", MenuScreen.routeName),
+      getNavItem(Icons.account_balance, "Back Drop Screen Tutorial",rn_backdrop),
+      getNavItem(Icons.account_balance_wallet, "Education", rn_default),
+      getNavItem(Icons.account_box, "Entertainment",rn_default),
+      getNavItem(Icons.account_circle, "Finance",rn_default),
+      getNavItem(Icons.access_alarm, "Health & fitness", rn_default),
+      getNavItem(Icons.account_balance_wallet, "Food & Drink", rn_default),
+      getNavItem(Icons.account_box, "Kids",rn_default),
+      getNavItem(Icons.account_circle, "LifeStyle", rn_default),
+      getNavItem(Icons.access_alarm, "News & Reading", rn_default),
+      getNavItem(Icons.account_balance_wallet, "Photo & Video", rn_default),
+      getNavItem(Icons.account_box, "Shopping",rn_default),
+      getNavItem(Icons.account_circle, "Social",rn_default),
+      getNavItem(Icons.access_alarm, "Tools", rn_default),
       aboutChild
     ];
 
@@ -136,101 +148,76 @@ class HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMi
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          title: Text(widget.title),
-          actions: <Widget>[
-           IconButton(icon: Icon(Icons.camera_alt),
-           onPressed:() {
-             Scaffold.of(context).showSnackBar(mysnackBar('Camera'));
-           }),
-            IconButton(icon: Icon(Icons.save),
-                onPressed:() {
-                  Scaffold.of(context).showSnackBar(mysnackBar('Save'));
-                }),
-            IconButton(icon: Icon(Icons.access_alarms),
-                onPressed:() {
-                  Scaffold.of(context).showSnackBar(mysnackBar('Alarm'));
-                }),
-            IconButton(icon: Icon(Icons.language),
-                onPressed:() {
-                  Scaffold.of(context).showSnackBar(mysnackBar('Language'));
-                }),
-        ],
-          backgroundColor: Colors.blueAccent,
-          // Set the bottom property of the Appbar to include a Tab Bar
-          bottom: getTabBar(),
-
-        ),
-
-        // Set the TabBar view as the body of the Scaffold
-        body:
-        Container(
-          // Center the content
-            child: Center(
-              // Add Text
-              child:  getTabBarView(<Widget>[firstTab(), secondTab(), thirdTab(),fourTab()]),
-            ),
-            // Set background
-            decoration: BoxDecoration(
-              // Add Gradient
-                gradient: getCustomGradient())),
-
-
-      drawer: getNavDrawer(context),
-
-      // Set the bottom navigation bar
-      bottomNavigationBar: Material(
-        // set the color of the bottom navigation bar
-        color: Colors.deepPurple,
-        // set the tab bar as the child of bottom navigation bar
-        child: TabBar(
-          tabs: <Tab>[
-            Tab(
-              // set icon to the tab
-              icon: Icon(Icons.cake),
-            ),
-            Tab(
-              icon: Icon(Icons.insert_emoticon),
-            ),
-            Tab(
-              icon: Icon(Icons.bluetooth),
-            ),
-            Tab(
-              icon: Icon(Icons.wifi),
-            ),
+        appBar: AppBar(
+            title: Text(widget.title),
+            actions: <Widget>[
+             IconButton(icon: Icon(Icons.camera_alt),
+             onPressed:() {
+               Scaffold.of(context).showSnackBar(mysnackBar('Camera'));
+             }),
+              IconButton(icon: Icon(Icons.save),
+                  onPressed:() {
+                    Scaffold.of(context).showSnackBar(mysnackBar('Save'));
+                  }),
+              IconButton(icon: Icon(Icons.access_alarms),
+                  onPressed:() {
+                    Scaffold.of(context).showSnackBar(mysnackBar('Alarm'));
+                  }),
+              IconButton(icon: Icon(Icons.language),
+                  onPressed:() {
+                    Scaffold.of(context).showSnackBar(mysnackBar('Language'));
+                  }),
           ],
-          // setup the controller
-          controller: controller,
+            backgroundColor: Colors.blueAccent,
+            // Set the bottom property of the Appbar to include a Tab Bar
+            bottom: getTabBar(),
+
+          ),
+
+          // Set the TabBar view as the body of the Scaffold
+          body: new SafeArea(
+           child:Container(
+            // Center the content
+              child: Center(
+                // Add Text
+                child:  getTabBarView(<Widget>[firstTab(), secondTab(), thirdTab(),fourTab()]),
+              ),
+              // Set background
+              decoration: BoxDecoration(
+                // Add Gradient
+                  gradient: getCustomGradient()))),
+
+        drawer: getNavDrawer(context),
+
+        // Set the bottom navigation bar
+        bottomNavigationBar: Material(
+          // set the color of the bottom navigation bar
+          color: Colors.deepPurple,
+          // set the tab bar as the child of bottom navigation bar
+          child: TabBar(
+            tabs: <Tab>[
+              Tab(
+                // set icon to the tab
+                icon: Icon(Icons.cake),
+              ),
+              Tab(
+                icon: Icon(Icons.insert_emoticon),
+              ),
+              Tab(
+                icon: Icon(Icons.bluetooth),
+              ),
+              Tab(
+                icon: Icon(Icons.wifi),
+              ),
+            ],
+            // setup the controller
+            controller: controller,
+          ),
         ),
-      ),
     );
   }
 }
 
-class MenuScreen extends StatefulWidget {
-
-  MenuScreen({Key key, this.menutitle}) : super(key: key);
-  final String menutitle;
-  static const String routeName = "/routname";
-
-  @override
-  _MenuScreenState createState() => _MenuScreenState();
-}
-
-class _MenuScreenState extends State<MenuScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Category"),
-      ),
-      body: Container(
-          child: Center(
-            child: Text(widget.menutitle),
-          )),
-    );
-  }
-}
 
 
 
