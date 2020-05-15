@@ -57,7 +57,7 @@ class _SplashScreenState extends State<SplashScreen> {
                      ) ))),
 
           Shimmer.fromColors(
-          baseColor: Colors.white,
+          baseColor: Colors.red,
           highlightColor: Colors.blue,
           child: Container(
             padding: EdgeInsets.all(30.0),

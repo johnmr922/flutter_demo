@@ -4,6 +4,8 @@ import 'package:flutterdemo/tabs/four_tab.dart';
 import 'package:flutterdemo/tabs/second_tab.dart';
 import 'package:flutterdemo/tabs/third_tab.dart';
 import 'package:flutterdemo/util/custom_snackbar.dart';
+import 'package:flutterdemo/util/util_dark.dart';
+
 
 class HomeScreen extends StatefulWidget {
 
@@ -161,7 +163,18 @@ class HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMi
         ),
 
         // Set the TabBar view as the body of the Scaffold
-        body: getTabBarView(<Widget>[firstTab(), secondTab(), thirdTab(),fourTab()]),
+        body:
+        Container(
+          // Center the content
+            child: Center(
+              // Add Text
+              child:  getTabBarView(<Widget>[firstTab(), secondTab(), thirdTab(),fourTab()]),
+            ),
+            // Set background
+            decoration: BoxDecoration(
+              // Add Gradient
+                gradient: getCustomGradient())),
+
 
       drawer: getNavDrawer(context),
 
